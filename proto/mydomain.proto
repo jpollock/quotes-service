@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "akkaserverless/annotations.proto";
+
+package com.example;
+
+message Thing {
+    string thing_id = 1 [(akkaserverless.field).entity_key = true];
+    Data data = 2;
+}
+
+message Data {
+    string somename = 1;
+    int32 somevalue = 2;
+}

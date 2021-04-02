@@ -1,0 +1,35 @@
+// This is the public API offered by your entity.
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "akkaserverless/annotations.proto";
+import "google/api/annotations.proto";
+
+import "mydomain.proto";
+
+package com.example;
+
+option go_package = "$packageInPathFormat";
+option java_outer_classname = "MyValueView";
+
+service MyServiceValueView {
+    rpc UpdateThing(Thing) returns (Thing) {
+        option (akkaserverless.method).eventing = {
+          in: {
+            value_changes: "value_things"
+          }
+        };
+        option (akkaserverless.method).view.update = {
+          table: "value_things"
+        };
+    }
+
+    rpc GetThings(google.protobuf.Empty) returns (stream Thing) {
+        option (akkaserverless.method).view.query = {
+          query: "select * from value_things"
+        };
+        option (google.api.http) = {
+            get: "/value/things"
+          };  
+    }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "akka-serverless-starter-javascript",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=13.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "@grpc/proto-loader": "^0.1.0",
+    "@lightbend/akkaserverless-javascript-sdk": "file:///Users/jeremypollock/development/lightbend/product/akkaserverless-framework/javascript-sdk",
+    "google-protobuf": "^3.0.0",
+    "grpc": "^1.20.2"
+  },
+  "devDependencies": {
+    "@lightbend/akkasls-scripts": "^0.18.0",
+    "chai": "^4.3.3",
+    "mocha": "^8.3.1"
+  },
+  "config": {
+    "dockerImage": "my-docker-repo/akka-serverless-starter-javascript",
+    "sourceDir": "./src",
+    "testSourceDir": "./test",
+    "protoSourceDir": "./proto"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha ./test",
+    "build": "akkasls-scripts build",
+    "package": "akkasls-scripts package",
+    "deploy": "akkasls-scripts deploy"
+  }
+}

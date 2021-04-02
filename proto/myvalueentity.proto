@@ -1,0 +1,32 @@
+// This is the public API offered by your entity.
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "akkaserverless/annotations.proto";
+import "google/api/annotations.proto";
+
+import "mydomain.proto";
+
+package com.example;
+
+option go_package = "$packageInPathFormat";
+option java_outer_classname = "MyValueEntity";
+
+message GetValueStateCommand {
+    string thing_id = 1 [(akkaserverless.field).entity_key = true];
+}
+
+service MyServiceValueEntity {
+    rpc SetData(Thing) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            put: "/value/things/{thing_id}"
+            body: "*"
+        };    
+    }
+    rpc GetData(GetValueStateCommand) returns (Data) {
+        option (google.api.http) = {
+            get: "/value/things/{thing_id}"
+        };    
+
+    }
+}

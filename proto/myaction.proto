@@ -1,0 +1,19 @@
+// This is the public API offered by your entity.
+syntax = "proto3";
+
+package com.example;
+
+option go_package = "$packageInPathFormat";
+option java_outer_classname = "MyAction";
+
+message MyRequest {
+    int32 value = 1;
+}
+
+message MyResponse {
+    string text = 1;
+}
+
+service MyServiceAction {
+    rpc Hello(MyRequest) returns (MyResponse);
+}
